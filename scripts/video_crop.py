@@ -2,22 +2,22 @@ import os
 import cv2
 
 # === 輸入與參數設定 ===
-input_video_path = r"D:\work\2025_ITRI_Intern\working\video_compare\original\mp4\Copy of BS0023.mp4"  # << 影片路徑
-output_dir = 'output_videos'
+input_video_path = r"V000000094.mp4"  # << 影片路徑
+output_dir = '3'
 
 # 定義裁切比例（相對寬度）例如：left = 0.1, right = 0.9 代表裁掉左右 10%
 """
-1, 2為left: 0.01 right: 0.6 
-3, 4為left: 0.01 right: 0.55
+1, 2為left: 0.01 right: 0.6 top: 0 bottom: 1
+3, 4為left: 0.01 right: 0.55 top: 0 bottom: 1
 5, 6為left: 0.4 right: 0.95 top: 0 bottom: 0.85
 """
 # 定義裁切比例（相對寬度和高度）
 # 寬度裁切：left_ratio 和 right_ratio (0 到 1)
 # 高度裁切：top_ratio 和 bottom_ratio (0 到 1)
-crop_left_ratio = 0.4   # 左邊裁切比例
-crop_right_ratio = 0.95   # 右邊裁切比例
+crop_left_ratio = 0.01   # 左邊裁切比例
+crop_right_ratio = 0.55   # 右邊裁切比例
 crop_top_ratio = 0     # 上方裁切比例
-crop_bottom_ratio = 0.85  # 下方裁切比例
+crop_bottom_ratio = 1  # 下方裁切比例
 
 # === 建立輸出資料夾 ===
 os.makedirs(output_dir, exist_ok=True)
@@ -51,8 +51,7 @@ if new_width <= 0 or new_height <= 0:
 # === 設定輸出影片參數 ===
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 out = cv2.VideoWriter(output_video_path, fourcc, fps, (new_width, new_height))
-
-print(f"處理中：{input_video_path}")
+print(f"處理中的影像：{input_video_path}")
 print(f"原始尺寸：{frame_width}x{frame_height}")
 print(f"裁切區間：寬度 ({crop_left}, {crop_right}) -> 新寬度：{new_width}")
 print(f"裁切區間：高度 ({crop_top}, {crop_bottom}) -> 新高度：{new_height}")
